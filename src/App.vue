@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { reactive,ref,onMounted,computed } from 'vue'
+import { reactive,ref,readonly,watchEffect,onMounted,computed } from 'vue'
 export default {
   name: 'App',
   setup(){
@@ -20,6 +20,19 @@ export default {
     const title = reactive({
       name:'welcome to vue 3 beta!'
     })
+
+    const original = reactive({
+      conut: 0
+    })
+
+    // 只读
+    const copy = readonly(original)
+
+    // watch
+    watchEffect(() => {
+      console.log(`readonly: ${copy.conut}`)
+    })
+
     const user = ref('ref黑铁');
 
     const updateUser = () => {
